@@ -17,10 +17,11 @@ const getPosts = require('./apis/get-posts.controller');
 const app = express();
 
 app.use(cors());
+app.use(express.urlencoded({ extended: false }));
 app.use(helmet());
 
-app.get('/api/posts', getPosts);
-app.post('/api/posts', createPost);
+app.get('/api/posts', (req, res) => getPosts(req, res));
+app.post('/api/posts', (req, res) => createPost(req, res));
 
 app.listen(
   PORT,
