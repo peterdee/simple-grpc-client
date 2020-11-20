@@ -4,14 +4,25 @@ if (env && env.error) {
   throw env.error;
 }
 
-const client = require('./client');
+const cors = require('cors');
+const express = require('express');
+const helmet = require('helmet');
 
-(function () {
-  return client.getPosts(null, (err, data) => {
-    if (err) {
-      return console.log('ERROR', err);
-    }
+const log = require('./utilities/log');
+const { PORT } = require('./configuration');
 
-    return console.log(data);
-  });
-}())
+const createPost = require('./apis/create-post.controller');
+const getPosts = require('./apis/get-posts.controller');
+
+const app = express();
+
+app.use(cors());
+app.use(helmet());
+
+app.get('/api/posts', getPosts);
+app.post('/api/posts', createPost);
+
+app.listen(
+  PORT,
+  () => log(`-- SIMPLE GRPC CLIENT is running on port ${PORT}`),
+);
