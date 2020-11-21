@@ -1,6 +1,12 @@
 const client = require('../grpc-client');
 
-module.exports = async (req, res) => {
+/**
+ * Create a post API handler
+ * @param {Request} req - request object
+ * @param {Response} res - response object
+ * @returns {Promise<void>}
+ */
+module.exports = (req, res) => {
   const {
     text = '',
     title = '',

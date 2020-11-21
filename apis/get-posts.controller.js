@@ -1,7 +1,14 @@
 const client = require('../grpc-client');
 
-module.exports = async (_, res) => {
-  return client.getPosts(null, (error, data) => {
+/**
+ * Get posts API handler
+ * @param {Request} _ - request object
+ * @param {Response} res - response object
+ * @returns {Promise<void>}
+ */
+module.exports = (_, res) => client.getPosts(
+  null,
+  (error, data) => {
     if (error) {
       return res.status(500).send({
         error,
@@ -15,5 +22,5 @@ module.exports = async (_, res) => {
       info: 'OK',
       status: 200,
     });
-  });
-};
+  },
+);

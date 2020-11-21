@@ -7,6 +7,7 @@ if (env && env.error) {
 const cors = require('cors');
 const express = require('express');
 const helmet = require('helmet');
+const path = require('path');
 
 const log = require('./utilities/log');
 const { PORT } = require('./configuration');
@@ -17,6 +18,7 @@ const getPosts = require('./apis/get-posts.controller');
 const app = express();
 
 app.use(cors());
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
 app.use(helmet());
 
