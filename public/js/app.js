@@ -45,7 +45,6 @@ const DrawPosts = async () => {
   }
 
   $('#posts').empty();
-  PostForm();
 
   if (data.posts.length === 0) {
     $('#posts').append(`
@@ -104,6 +103,7 @@ const Index = async () => {
     `);
 
     await DrawPosts();
+    PostForm();
 
     $('#form').on('submit', async (event) => {
       event.preventDefault();
@@ -119,7 +119,7 @@ const Index = async () => {
       $('#title').attr('disabled', true);
 
       try {
-        await $.ajax({
+        const response = await $.ajax({
           data: {
             text: text.trim(),
             title: title.trim(),
@@ -127,11 +127,15 @@ const Index = async () => {
           method: 'POST',
           url: '/api/posts',
         });
+        console.log('post sent', response);
 
         $('#form-button').attr('disabled', false);
         $('#text').attr('disabled', false);
         $('#title').attr('disabled', false);
-        return DrawPosts();
+        
+        $('#text').val('');
+        $('#title').val('');
+        await DrawPosts();
       } catch {
         $('#form-button').attr('disabled', false);
         $('#text').attr('disabled', false);

@@ -4,7 +4,7 @@ if (env && env.error) {
   throw env.error;
 }
 
-const compress = require('compress');
+const compress = require('express-compression');
 const cors = require('cors');
 const express = require('express');
 const helmet = require('helmet');
@@ -23,15 +23,14 @@ const limiter = rateLimiter({
   max: 100,
 });
 
-app.use(limiter());
 app.use(compress());
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
 app.use(helmet());
 
-app.get('/api/posts', getPosts);
-app.post('/api/posts', createPost);
+app.get('/api/posts', limiter, getPosts);
+app.post('/api/posts', limiter, createPost);
 
 app.listen(
   PORT,
