@@ -1,6 +1,16 @@
 ## simple-grpc-client
 
-A simple gRPC client with Node
+A simple gRPC client with Node.
+
+Stack: [Node](https://nodejs.org), [Express](http://expressjs.com), [gRPC-JS](https://www.npmjs.com/package/@grpc/grpc-js), [jQuery](https://jquery.com/)
+
+DEV: http://localhost:3300
+
+STAGE: https://simple-grpc-client.herokuapp.com
+
+The server repository:
+
+https://github.com/peterdee/simple-grpc-server
 
 ### Deploy
 
@@ -18,7 +28,7 @@ The `.env` file is required. See the [.env.example](.env.example) file for detai
 ### Launch
 
 ```shell script
-npm start
+npm run dev
 ```
 
 ### Linting
@@ -26,3 +36,7 @@ npm start
 ```shell script
 npm run lint
 ```
+
+### Heroku
+
+The `stage` branch is auto-deployed to Heroku.

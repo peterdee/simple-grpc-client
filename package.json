@@ -9,8 +9,9 @@
     "url": "https://github.com/peterdee"
   },
   "scripts": {
+    "dev": "nodemon ./index.js",
     "lint": "eslint",
-    "start": "nodemon ./index.js"
+    "start": "node ./index.js"
   },
   "engines": {
     "node": ">=14.15.0",
