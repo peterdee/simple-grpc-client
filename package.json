@@ -28,9 +28,11 @@
   "dependencies": {
     "@grpc/grpc-js": "^1.2.1",
     "@grpc/proto-loader": "^0.5.5",
+    "compress": "^0.99.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-rate-limit": "^5.2.3",
     "helmet": "^4.2.0"
   },
   "devDependencies": {
