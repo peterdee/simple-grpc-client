@@ -11,15 +11,7 @@ module.exports = (req, res) => {
     text = '',
     title = '',
   } = req.body;
-  if (!(text && title)) {
-    return res.status(400).send({
-      info: 'MISSING_DATA',
-      status: 400,
-    });
-  }
-  const trimmedText = text.trim();
-  const trimmedTitle = title.trim();
-  if (!(trimmedText && trimmedTitle)) {
+  if (!(text && text.trim() && title && title.trim())) {
     return res.status(400).send({
       info: 'MISSING_DATA',
       status: 400,
@@ -28,8 +20,8 @@ module.exports = (req, res) => {
 
   return client.createPost(
     {
-      text: trimmedText,
-      title: trimmedTitle,
+      text: text.trim(),
+      title: title.trim(),
     },
     (error, data) => {
       if (error) {

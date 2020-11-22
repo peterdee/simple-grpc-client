@@ -115,6 +115,27 @@ input:disabled, textarea:disabled {
   height: var(--footer-height);
 }
 
+/* Modal */
+.modal-background {
+  background-color: var(--text);
+  height: 100vh;
+  opacity: 0.5;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+}
+.modal-page {
+  background-color: var(--smoke);
+  border-radius: 4px;
+  height: 560px;
+  left: calc(50% - 210px);
+  padding: 16px;
+  position: fixed;
+  top: calc(50% - 280px);
+  width: 420px;
+  z-index: 11;
+}
+
 /* Loader */
 .lds-hourglass {
   display: inline-block;

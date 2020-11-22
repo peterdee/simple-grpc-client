@@ -31,12 +31,58 @@ const PostForm = () => $('#post-form').empty().append(`
   </form>
 `);
 
+const DrawPosts = async () => {
+  const { data } = await $.ajax({
+    method: 'GET',
+    url: '/api/posts',
+  });
+  if (!(data && data.posts)) {
+    return $('#posts').empty().append(`
+      <div class="error text-center">
+        Error loading the posts!
+      </div>
+    `);
+  }
+
+  $('#posts').empty();
+  PostForm();
+
+  if (data.posts.length === 0) {
+    $('#posts').append(`
+      <div class="text-center">
+        Posts not found!
+      </div>
+    `);
+  }
+  
+  return data.posts.forEach((post) => $('#posts').append(`
+    <div
+      class="flex direction-column mb-16"
+      id="${post._id}"
+    >
+      <h2>${post.title}</h2>
+      <div>${post.text}</div>
+      <div class="fs-12">
+        Added on ${new Date(Number(post.created))}
+      </div>
+    </div>
+  `));
+};
+
 const Index = async () => {
   $('#app').empty().append(`
+    <div id="modal"></div>
     <div class="flex direction-column page-wrap">
-      <h1 class="header text-center mb-16 noselect">
+      <h1 class="header text-center noselect">
         A SIMPLE GRPC DEMO
       </h1>
+      <a
+        class="text-center mb-16 noselect"
+        href="#"
+        id="about"
+      >
+        ABOUT
+      </a>
       <div
         class="flex direction-column items"
         id="posts"
@@ -56,42 +102,8 @@ const Index = async () => {
         <div class="lds-hourglass"></div>
       </div>
     `);
-    
-    const { data } = await $.ajax({
-      method: 'GET',
-      url: '/api/posts',
-    });
-    if (!(data && data.posts)) {
-      return $('#posts').empty().append(`
-        <div class="error text-center">
-          Error loading the posts!
-        </div>
-      `);
-    }
 
-    $('#posts').empty();
-    PostForm();
-
-    if (data.posts.length === 0) {
-      $('#posts').append(`
-        <div class="text-center">
-          Posts not found!
-        </div>
-      `);
-    }
-
-    data.posts.map((post) => $('#posts').append(`
-      <div
-        class="flex direction-column mb-16"
-        id="${post._id}"
-      >
-        <h2>${post.title}</h2>
-        <div>${post.text}</div>
-        <div class="fs-12">
-          Added on ${new Date(Number(post.created))}
-        </div>
-      </div>
-    `));
+    await DrawPosts();
 
     $('#form').on('submit', async (event) => {
       event.preventDefault();
@@ -115,8 +127,11 @@ const Index = async () => {
           method: 'POST',
           url: '/api/posts',
         });
-        
-        return window.location.reload();
+
+        $('#form-button').attr('disabled', false);
+        $('#text').attr('disabled', false);
+        $('#title').attr('disabled', false);
+        return DrawPosts();
       } catch {
         $('#form-button').attr('disabled', false);
         $('#text').attr('disabled', false);
@@ -135,6 +150,8 @@ const Index = async () => {
       </div>
     `);
   }
+
+  $('#about').on('click', About);
 };
 
 $(document).ready(() => Index());
