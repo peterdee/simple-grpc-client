@@ -1,6 +1,4 @@
-const env = process.env.ENV === 'heroku'
-  ? {}
-  : require('dotenv').config();
+const env = require('dotenv').config();
 
 if (env && env.error) {
   throw env.error;

@@ -36,7 +36,3 @@ npm run dev
 ```shell script
 npm run lint
 ```
-
-### Heroku
-
-The `stage` branch is auto-deployed to Heroku.
