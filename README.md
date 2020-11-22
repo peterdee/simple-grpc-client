@@ -6,8 +6,6 @@ Stack: [Node](https://nodejs.org), [Express](http://expressjs.com), [gRPC-JS](ht
 
 DEV: http://localhost:3300
 
-STAGE: https://simple-grpc-client.herokuapp.com
-
 The server repository:
 
 https://github.com/peterdee/simple-grpc-server
@@ -36,7 +34,3 @@ npm run dev
 ```shell script
 npm run lint
 ```
-
-### Heroku
-
-The `stage` branch is auto-deployed to Heroku.
