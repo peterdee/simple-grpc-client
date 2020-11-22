@@ -95,6 +95,8 @@ const Index = async () => {
     </div>
   `);
 
+  $('#about').on('click', About);
+
   try {
     $('#posts').append(`
       <div class="flex justify-content-center noselect">
@@ -132,7 +134,7 @@ const Index = async () => {
         $('#form-button').attr('disabled', false);
         $('#text').attr('disabled', false);
         $('#title').attr('disabled', false);
-        
+
         $('#text').val('');
         $('#title').val('');
         await DrawPosts();
@@ -154,8 +156,6 @@ const Index = async () => {
       </div>
     `);
   }
-
-  $('#about').on('click', About);
 };
 
 $(document).ready(() => Index());

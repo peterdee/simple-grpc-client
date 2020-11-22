@@ -2,7 +2,7 @@
 
 A simple gRPC client with Node.
 
-Stack: [Node](https://nodejs.org), [Express](http://expressjs.com), [gRPC-JS](https://www.npmjs.com/package/@grpc/grpc-js), [jQuery](https://jquery.com/)
+Stack: [Node](https://nodejs.org), [Express](http://expressjs.com), [gRPC-JS](https://www.npmjs.com/package/@grpc/grpc-js), [jQuery](https://jquery.com)
 
 DEV: http://localhost:3300
 
